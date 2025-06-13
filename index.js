@@ -4,8 +4,8 @@ import Lab5 from './Lab5/index.js';
 import cors from "cors";
 import UserRoutes from "./Kambaz/Users/routes.js";
 import CourseRoutes from "./Kambaz/Courses/routes.js";
-// import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js":
-// import AssignmentRoutes from "./Assignments/routes.js";
+import EnrollmentRoutes from "./Kambaz/Enrollments/routes.js";
+import AssignmentRoutes from "./Kambaz/Assignments/routes.js";
 import ModuleRoutes from './Kambaz/Modules/routes.js';
 import "dotenv/config";
 import session from "express-session";
@@ -64,9 +64,9 @@ app.use(express.json());
 Lab5(app);
 UserRoutes(app);
 CourseRoutes(app);
-// EnrollmentRoutes(app);
+EnrollmentRoutes(app);
 ModuleRoutes(app);
-// AssignmentRoutes(app)
+AssignmentRoutes(app)
 Hello(app);
 
 app.listen(process.env.PORT || 4000);
