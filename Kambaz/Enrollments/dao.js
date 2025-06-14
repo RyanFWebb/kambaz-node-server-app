@@ -6,3 +6,15 @@ export function enrollUserInCourse(userId, courseId) {
   const { enrollments } = Database;
   enrollments.push({ _id: uuidv4(), user: userId, course: courseId });
 }
+
+export function unenrollUserFromCourse(userId, courseId) {
+  const { enrollments } = Database;
+  const index = enrollments.findIndex(
+    (e) => e.user === userId && e.course === courseId
+  );
+  if (index !== -1) {
+    enrollments.splice(index, 1);
+    return { status: "success" };
+  }
+  return { status: "not found" };
+}

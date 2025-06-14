@@ -5,10 +5,26 @@ export function findAllCourses() {
   return Database.courses;
 }
 
+// export function findCoursesForEnrolledUser(userId) {
+//   const { courses, enrollments } = Database;
+//   const enrolledCourses = courses.filter((course) =>
+//     enrollments.some((enrollment) => enrollment.user === userId && enrollment.course === course._id));
+//   return enrolledCourses;
+// }
+
 export function findCoursesForEnrolledUser(userId) {
   const { courses, enrollments } = Database;
-  const enrolledCourses = courses.filter((course) =>
-    enrollments.some((enrollment) => enrollment.user === userId && enrollment.course === course._id));
+  const enrolledCourseIds = enrollments
+    .filter((enrollment) => enrollment.user === userId)
+    .map((enrollment) => enrollment.course);
+
+  const enrolledCourses = courses
+    .filter((course) => enrolledCourseIds.includes(course._id))
+    .map((course) => ({
+      ...course,
+      enrolled: true,
+    }));
+
   return enrolledCourses;
 }
 
