@@ -45,5 +45,11 @@ export default function CourseRoutes(app) {
         res.send(status);
     });
 
+    app.get("/api/courses/:cid/users", async (req, res) => {
+        const { cid } = req.params;
+        const users = await enrollmentsDao.findUsersForCourse(cid);
+        res.send(users);
+    });
+
 
 }
