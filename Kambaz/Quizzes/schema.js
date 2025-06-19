@@ -1,20 +1,71 @@
 import mongoose from "mongoose";
+
 const quizSchema = new mongoose.Schema(
     {
         _id: String,
         title: String,
+        description: String,
         course: { type: String, ref: "CourseModel" },
         available: Date,
         due: Date,
-        points: Number,
-        assignTo: String,
-        displayGrade: {
+        until: Date,
+        quizType: {
             type: String,
-            enum: ["Percentage", "Decimal", "Number", "PROJECTS"],
-            default: "Percentage",
+            enum: ["Graded Quiz", "Practice Quiz", "Graded Survey", "Ungraded Survey"],
+            default: "Graded Quiz",
         },
-        description: String,
+        points: Number,
+        assignmentGroup: {
+            type: String,
+            enum: ["Quizzes", "Exams", "Assignments", "Project"],
+            default: "Quizzes",
+        },
+        shuffleAnswers: {
+            type: Boolean,
+            default: true,
+        },
+        timeLimit: {
+            type: Number,
+            default: 20, // in minutes
+        },
+        multipleAttempts: {
+            type: Boolean,
+            default: false,
+        },
+        attempts: {
+            type: Number,
+            default: 1,
+        },
+        showCorrectAnswers: {
+            type: String,
+            enum: ["Immediately", "Never", "After Due Date"],
+            default: "After Due Date",
+        },
+        accessCode: {
+            type: String,
+            default: "",
+        },
+        oneQuestionAtATime: {
+            type: Boolean,
+            default: true,
+        },
+        webcamRequired: {
+            type: Boolean,
+            default: false,
+        },
+        lockQuestionsAfterAnswering: {
+            type: Boolean,
+            default: false,
+        },
+        assignTo: {
+            type: String,
+            default: "Everyone",
+        },
+        published: {
+            type: Boolean,
+            default: false,
+        },
     },
-    { collection: "assignments" }
+    { collection: "quizzes" }
 );
 export default quizSchema;
