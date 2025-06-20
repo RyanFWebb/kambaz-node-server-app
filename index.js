@@ -32,24 +32,35 @@ const allowedOrigins = [
 //   })
 // );
 
+// app.use(
+//   cors({
+//     credentials: true,
+//     origin: function (origin, callback) {
+//       if (!origin) return callback(null, true); // Allow requests like curl or Postman
+//       const allowedOrigins = [
+//         "https://kambaz-react-web-app-webb.netlify.app",
+//         /^https:\/\/[a-z0-9]+--kambaz-react-web-app-webb\.netlify\.app$/,
+//         "http://localhost:5173"
+//       ];
+//       const isAllowed = allowedOrigins.some(o =>
+//         typeof o === "string" ? o === origin : o.test(origin)
+//       );
+//       if (isAllowed) {
+//         return callback(null, true);
+//       }
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   })
+// );
 app.use(
   cors({
     credentials: true,
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // Allow requests like curl or Postman
-      const allowedOrigins = [
-        "https://kambaz-react-web-app-webb.netlify.app",
-        /^https:\/\/[a-z0-9]+--kambaz-react-web-app-webb\.netlify\.app$/,
-        "http://localhost:5173"
-      ];
-      const isAllowed = allowedOrigins.some(o =>
-        typeof o === "string" ? o === origin : o.test(origin)
-      );
-      if (isAllowed) {
-        return callback(null, true);
-      }
-      callback(new Error("Not allowed by CORS"));
-    }
+    origin: [
+      "https://kambaz-react-web-app-webb.netlify.app",
+      /^https:\/\/.*--kambaz-react-web-app-webb\.netlify\.app$/,
+      "http://localhost:5173",
+      "http://localhost:4000"
+    ]
   })
 );
 
