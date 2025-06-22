@@ -58,6 +58,7 @@ app.use(
     origin: [
       "https://kambaz-react-web-app-webb.netlify.app",
       /^https:\/\/.*--kambaz-react-web-app-webb\.netlify\.app$/,
+      "https://kambaz-react-web-quizzes.netlify.app",
       "http://localhost:5173",
       "http://localhost:4000"
     ]
